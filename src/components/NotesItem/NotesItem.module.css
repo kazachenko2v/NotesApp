@@ -1,0 +1,38 @@
+.note_item {
+  flex: 0 1 300px;
+  display: flex;
+  height: 250px;
+  position: relative;
+  padding: 50px 20px 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(./img/note.png);
+  margin-bottom: 30px;
+}
+
+.content_container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  gap: 10px;
+}
+
+.note_text {
+  flex: 1 1 100%;
+  overflow: hidden;
+}
+
+.button_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button {
+  opacity: 0;
+}
+
+.button__active {
+  opacity: 1;
+}
