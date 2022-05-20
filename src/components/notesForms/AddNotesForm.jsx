@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { AiOutlineCheck } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
+import NotesContext from "../../reducer/NotesContext";
+
 import styles from "./Forms.module.css";
 
-const AddNotesForm = ({ item, addNote, toggleActive }) => {
+const AddNotesForm = ({ item, toggleActive }) => {
+  const { addNote } = useContext(NotesContext);
+
   let [note, setNote] = useState({
     title: item.title,
     body: item.body,

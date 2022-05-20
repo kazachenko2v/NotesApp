@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import EditNotesForm from "../notesForms/EditNotesForm";
 import Modal from "../UI/Modal";
 import TagsList from "../TagsList/TagsList";
+import modalContext from "../../reducer/NotesContext";
 
 import styles from "./NotesItem.module.css";
 import cnBind from "classnames/bind";
@@ -11,14 +12,17 @@ import { BsFillPencilFill } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
 import { IconContext } from "react-icons";
 
-const NotesItem = ({ index, item, removeNote, editNote, setSearchQuery }) => {
+const NotesItem = ({ item, index }) => {
+  const { editNote, removeNote } = useContext(modalContext);
+
   let [isActiveEditForm, setActiveEditForm] = useState(false);
   let [isActiveButton, setActiveButton] = useState(false);
-  let cx = cnBind.bind(styles);
 
   function toggleActiveEditForm() {
     setActiveEditForm(!isActiveEditForm);
   }
+
+  let cx = cnBind.bind(styles);
 
   return (
     <>
@@ -44,11 +48,7 @@ const NotesItem = ({ index, item, removeNote, editNote, setSearchQuery }) => {
           <p>
             {item.tags &&
               item.tags.map((item, index) => (
-                <TagsList
-                  key={index}
-                  tag={item}
-                  setSearchQuery={setSearchQuery}
-                />
+                <TagsList key={index} tag={item} />
               ))}
           </p>
         </div>

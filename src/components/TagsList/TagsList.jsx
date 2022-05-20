@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import SearchContext from "../../context/SearchContext";
 import styles from "./TagsList.module.css";
 
-const TagsList = ({ tag, setSearchQuery }) => {
-  function clickHendler(e) {
+const TagsList = ({ tag }) => {
+  const { searchTags } = useContext(SearchContext);
+
+  function clickHandler(e) {
     e.preventDefault();
-    setSearchQuery(tag);
+    searchTags(tag);
   }
   return (
-    <a className={styles.tag_link} onClick={(e) => clickHendler(e)}>
+    <a className={styles.tag_link} onClick={(e) => clickHandler(e)}>
       {tag}&nbsp;
     </a>
   );

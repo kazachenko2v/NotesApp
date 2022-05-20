@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { AiOutlineCheck } from "react-icons/ai";
 import { IconContext } from "react-icons";
 
+import NotesContext from "../../reducer/NotesContext";
+
 import styles from "./Forms.module.css";
 
-const EditNotesForm = ({ item, editNote, toggleActive }) => {
-  let [note, setNote] = useState(item);
+const EditNotesForm = ({ item, toggleActive }) => {
+  const { editNote } = useContext(NotesContext);
+
+  const [note, setNote] = useState(item);
 
   function findTags(string) {
-    let arr = string.match(/#[a-zа-яё|\d]+(?=\b)/gim);
+    const arr = string.match(/#[a-zа-яё|\d]+(?=\b)/gim);
     if (arr) {
       return arr.filter((item, index) => arr.indexOf(item) === index);
     } else {
