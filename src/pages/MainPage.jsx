@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import NotesList from "../components/NoteList/NotesList";
 import AddNotesForm from "../components/notesForms/AddNotesForm";
+import AddNotesFormtoggleActiveWithIndex from "../components/notesForms/AddNotesFormtoggleActiveWithIndex";
 import SearchForm from "./../components/SearchForm";
 import Modal from "../components/UI/Modal";
 import { setLocalStorage } from "../utils/localStorage";
@@ -24,9 +25,14 @@ const MainPage = () => {
   }, [notes]);
 
   let [isActive, setActive] = useState(false);
+  let [isActiveWithIndex, setActiveWithIndex] = useState(false);
 
   const toggleActive = () => {
     setActive(!isActive);
+  };
+
+  const toggleActiveWithIndex = () => {
+    setActiveWithIndex(!isActiveWithIndex);
   };
 
   return (
@@ -41,10 +47,22 @@ const MainPage = () => {
         color="white"
         onClick={toggleActive}
       />
+      <GoDiffAdded
+        title="Add note"
+        size="30px"
+        color="red"
+        onClick={toggleActiveWithIndex}
+      />
       <Modal isActive={isActive}>
         <AddNotesForm
           item={{ title: "", body: "" }}
           toggleActive={toggleActive}
+        />
+      </Modal>
+      <Modal isActive={isActiveWithIndex}>
+        <AddNotesFormtoggleActiveWithIndex
+          item={{ title: "", body: "" }}
+          toggleActiveWithIndex={toggleActiveWithIndex}
         />
       </Modal>
     </>

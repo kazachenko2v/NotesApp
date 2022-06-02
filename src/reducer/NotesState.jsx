@@ -3,7 +3,12 @@ import NotesContext from "./NotesContext";
 import { notesReducer } from "./notesReducer";
 import initNotes from "../notes/notes";
 
-import { EDIT_NOTE, ADD_NEW_NOTE, REMOVE_NOTE } from "./types";
+import {
+  EDIT_NOTE,
+  ADD_NEW_NOTE,
+  REMOVE_NOTE,
+  ADD_NEW_NOTE_WITH_INDEX,
+} from "./types";
 import { getLocalStorage } from "../utils/localStorage";
 
 const NotesState = ({ children }) => {
@@ -30,6 +35,16 @@ const NotesState = ({ children }) => {
     dispatch({ type: ADD_NEW_NOTE, payload: payload });
   };
 
+  const addNoteWithIndex = (newNote, index) => {
+    const payload = {
+      id: Date.now(),
+      title: newNote.title,
+      body: newNote.body,
+      tags: newNote.tags,
+    };
+    dispatch({ type: ADD_NEW_NOTE_WITH_INDEX, payload: { payload, index } });
+  };
+
   const removeNote = (id) => {
     dispatch({ type: REMOVE_NOTE, payload: id });
   };
@@ -40,6 +55,7 @@ const NotesState = ({ children }) => {
         editNote,
         addNote,
         removeNote,
+        addNoteWithIndex,
         notes: notes,
       }}
     >

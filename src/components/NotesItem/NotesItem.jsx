@@ -13,7 +13,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { IconContext } from "react-icons";
 
 const NotesItem = ({ item, index }) => {
-  const { editNote, removeNote } = useContext(modalContext);
+  const { removeNote } = useContext(modalContext);
 
   let [isActiveEditForm, setActiveEditForm] = useState(false);
   let [isActiveButton, setActiveButton] = useState(false);
@@ -28,11 +28,7 @@ const NotesItem = ({ item, index }) => {
     <>
       {isActiveEditForm ? (
         <Modal isActive={isActiveEditForm}>
-          <EditNotesForm
-            item={item}
-            editNote={editNote}
-            toggleActive={toggleActiveEditForm}
-          />
+          <EditNotesForm item={item} toggleActive={toggleActiveEditForm} />
         </Modal>
       ) : null}
       <div
