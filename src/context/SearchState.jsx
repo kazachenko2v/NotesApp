@@ -11,7 +11,9 @@ const SearchState = ({ children }) => {
   };
 
   useEffect(() => {
-    textInput.current.value = searchQuery;
+    if (textInput) {
+      textInput.current.value = searchQuery;
+    }
   }, [searchQuery]);
 
   return (

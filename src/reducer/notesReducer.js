@@ -1,18 +1,7 @@
-import {
-  ADD_NEW_NOTE,
-  ADD_NEW_NOTE_WITH_INDEX,
-  EDIT_NOTE,
-  GET_NOTES,
-  REMOVE_NOTE,
-} from "./types";
+import { ADD_NEW_NOTE, EDIT_NOTE, REMOVE_NOTE } from "./types";
 
 const handlers = {
-  [GET_NOTES]: (state, { payload }) => [...payload],
   [ADD_NEW_NOTE]: (state, { payload }) => [...state, payload],
-  [ADD_NEW_NOTE_WITH_INDEX]: (state, { payload }) => {
-    state.splice(payload.index, 0, payload.payload);
-    return state;
-  },
   [EDIT_NOTE]: (state, { payload }) => [
     ...state.map((item) => {
       return (item =

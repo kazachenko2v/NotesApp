@@ -10,7 +10,7 @@
 }
 
 .modale_content {
-  background-image: url(../NotesItem/img/note.png);
+  background-image: url(../../NoteItem/img/note.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

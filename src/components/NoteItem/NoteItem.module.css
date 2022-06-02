@@ -1,14 +1,18 @@
 .note_item {
-  flex: 0 1 300px;
   display: flex;
+  width: 300px;
   height: 250px;
   position: relative;
   padding: 50px 20px 30px;
+  margin-bottom: 20px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url(./img/note.png);
-  margin-bottom: 30px;
+}
+
+.note_item__dragging {
+  opacity: 0;
 }
 
 .content_container {
@@ -27,9 +31,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.button {
   opacity: 0;
 }
 

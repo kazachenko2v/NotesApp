@@ -9,6 +9,7 @@ const TagsList = ({ tag }) => {
     e.preventDefault();
     searchTags(tag);
   }
+
   return (
     <a className={styles.tag_link} onClick={(e) => clickHandler(e)}>
       {tag}&nbsp;

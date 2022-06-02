@@ -1,0 +1,9 @@
+.search {
+  padding: 5px 15px 5px 40px;
+  border-radius: 30px;
+  font-family: inherit;
+}
+
+.search:focus::placeholder {
+  color: transparent;
+}

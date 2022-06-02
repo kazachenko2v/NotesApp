@@ -1,21 +1,23 @@
 import React, { useContext } from "react";
-import NotesItem from "../NotesItem/NotesItem";
+import NoteItem from "../NoteItem/NoteItem";
 import NotesContext from "../../reducer/NotesContext";
 import SearchContext from "../../context/SearchContext";
 
 import styles from "./NotesList.module.css";
 
-function NotesList() {
+const NotesList = React.memo(() => {
   const { searchQuery } = useContext(SearchContext);
   const { notes } = useContext(NotesContext);
 
   let noteText = (note) => {
-    return note.title + note.body + note.tags;
+    return (note.title + note.body + note.tags).toLowerCase();
   };
 
   const getSearchedNoteList = () => {
     if (searchQuery) {
-      return [...notes].filter((item) => noteText(item).includes(searchQuery));
+      return [...notes].filter((item) =>
+        noteText(item).includes(searchQuery.toLowerCase())
+      );
     }
     return notes;
   };
@@ -25,10 +27,10 @@ function NotesList() {
   return (
     <div className={styles.list_container}>
       {searchedNoteList.map((item, index) => (
-        <NotesItem key={item.id} index={index + 1} item={item} />
+        <NoteItem key={item.id} index={index} item={item} />
       ))}
     </div>
   );
-}
+});
 
 export default NotesList;

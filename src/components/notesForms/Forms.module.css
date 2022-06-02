@@ -11,6 +11,7 @@
 .form_title {
   font-size: 30px;
   width: 230px;
+  margin-bottom: 10px;
 }
 
 .button_container {
@@ -33,7 +34,7 @@
 .form_title,
 .form_textarea {
   background-color: rgba(0, 0, 0, 0);
-  border-color: #427aec;
+  border-color: #6d9dfc;
   border-radius: 5px;
   border-style: dashed;
   border-width: 1px;
