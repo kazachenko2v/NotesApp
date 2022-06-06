@@ -1,7 +1,24 @@
+.search_conteiner {
+  position: relative;
+}
+
 .search {
-  padding: 5px 15px 5px 40px;
+  padding: 5px 30px 5px 40px;
   border-radius: 30px;
   font-family: inherit;
+}
+
+.search_icon {
+  position: absolute;
+  top: 7px;
+  left: 11px;
+}
+
+.clear_icon {
+  position: absolute;
+  top: 7px;
+  right: 11px;
+  cursor: pointer;
 }
 
 .search:focus::placeholder {

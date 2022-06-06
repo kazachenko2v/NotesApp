@@ -21,26 +21,28 @@ const MainPage = () => {
     setLocalStorage("notes", notes);
   }, [notes]);
 
-  let [isActive, setActive] = useState(false);
+  let [isActiveEditForm, setActiveEditForm] = useState(false);
 
-  const toggleActive = () => {
-    setActive(!isActive);
+  const toggleActiveEditForm = () => {
+    setActiveEditForm(!isActiveEditForm);
   };
 
   return (
     <div className={styles.main_container}>
       <SearchState>
-        <Header toggleActive={toggleActive} />
+        <Header toggleActive={toggleActiveEditForm} />
         <NotesList />
       </SearchState>
 
-      <Modal isActive={isActive}>
-        <NotesModForm
-          item={{ title: "", body: "" }}
-          toggleActive={toggleActive}
-          noteModFunc={addNote}
-        />
-      </Modal>
+      {isActiveEditForm && (
+        <Modal>
+          <NotesModForm
+            item={{ title: "", body: "" }}
+            toggleActive={toggleActiveEditForm}
+            noteModFunc={addNote}
+          />
+        </Modal>
+      )}
     </div>
   );
 };

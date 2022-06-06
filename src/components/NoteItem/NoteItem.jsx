@@ -10,7 +10,7 @@ import { IconContext } from "react-icons";
 
 import styles from "./NoteItem.module.css";
 import cnBind from "classnames/bind";
-import cn from "classnames/bind";
+import cn from "classnames";
 
 const NotesItem = ({ item, index, isDragging }) => {
   const { removeNote, editNote } = useContext(modalContext);
@@ -26,7 +26,7 @@ const NotesItem = ({ item, index, isDragging }) => {
   return (
     <>
       {isActiveEditForm && (
-        <Modal isActive={isActiveEditForm}>
+        <Modal>
           <NotesModForm
             item={item}
             toggleActive={toggleActiveEditForm}

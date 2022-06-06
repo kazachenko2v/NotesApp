@@ -4,16 +4,6 @@
   padding: 15px 0;
 }
 
-.search_conteiner {
-  position: relative;
-}
-
-.search_icon {
-  position: absolute;
-  top: 7px;
-  left: 11px;
-}
-
 .add_conteiner {
   display: flex;
   align-items: center;

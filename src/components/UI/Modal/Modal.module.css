@@ -1,5 +1,7 @@
 .modale_container {
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 100;
   top: 0;
@@ -17,10 +19,4 @@
   width: 300px;
   height: 250px;
   padding: 50px 20px 30px;
-}
-
-.modale__active {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

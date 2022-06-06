@@ -1,15 +1,21 @@
 import React from "react";
-import cnBind from "classnames/bind";
-import cn from "classnames/bind";
 import styles from "./Modal.module.css";
 
-const Modal = ({ isActive, children }) => {
-  const cx = cnBind.bind(styles);
+const Modal = ({ children }) => {
+  // React.useEffect(() => {
+  //   const keyHandle = (e) => {
+  //     console.log(e.code);
+
+  //     if (e.code === "Escape") {
+  //       setActive(false);
+  //     }
+  //   };
+  //   window.addEventListener("keydown", keyHandle);
+  //   return () => window.removeEventListener("keydown", keyHandle);
+  // }, []);
 
   return (
-    <div
-      className={cn(styles.modale_container, cx({ modale__active: isActive }))}
-    >
+    <div className={styles.modale_container}>
       <div className={styles.modale_content}>{children}</div>
     </div>
   );

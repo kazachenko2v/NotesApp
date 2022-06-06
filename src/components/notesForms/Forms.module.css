@@ -42,6 +42,10 @@
   color: inherit;
 }
 
+.form_title__complete {
+  border-color: #e22b2b;
+}
+
 .form_textarea {
   resize: none;
 }
