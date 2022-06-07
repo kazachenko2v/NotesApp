@@ -1,7 +1,7 @@
 const notes = [
   {
     id: 1,
-    title: "sunt aut facere",
+    title: "sunt aut facer",
     body: "Phasellus in diam semper nunc molestie auctor quis id #urna. Aliquam erat volutpat. Nam tempor vehicula lorem, eget rutrum eros.",
     tags: ["#urna"],
   },
@@ -13,19 +13,19 @@ const notes = [
   },
   {
     id: 3,
-    title: "sunt #aut facere",
+    title: "sunt #aut",
     body: "Phasellus euismod rutrum quam non ullamcorper. Phasellus a leo nisi. Pellentesque consequat leo non dolor.",
     tags: ["#aut"],
   },
   {
     id: 4,
-    title: "Nunc fermentum",
+    title: "Nunc ferme",
     body: "Pellentesque faucibus dolor eu fermentum dapibus. Vivamus cursus auctor tortor sed luctus. Cras sit amet diam sed velit feugiat commodo.",
     tags: [],
   },
   {
     id: 5,
-    title: "Aliquam malesua",
+    title: "Aliquam",
     body: "Quisque tellus sapien, ultrices quis finibus in, #blandit non sapien. Quisque id mi non dolor commodo eleifend. Suspendisse vulputate orci.",
     tags: ["#blandit"],
   },
