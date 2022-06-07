@@ -1,4 +1,4 @@
-export default [
+const notes = [
   {
     id: 1,
     title: "sunt aut facere",
@@ -36,3 +36,5 @@ export default [
     tags: ["#placerat", "#massa"],
   },
 ];
+
+export default notes;

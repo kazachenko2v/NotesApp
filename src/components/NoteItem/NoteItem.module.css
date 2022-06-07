@@ -5,10 +5,21 @@
   position: relative;
   padding: 50px 20px 30px;
   margin-bottom: 20px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image: url(./img/note.png);
+  /* object-fit: contain; */
+}
+
+.bgimage {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1000;
+}
+
+.bgimage__loaded {
+  display: block;
 }
 
 .note_item__dragging {

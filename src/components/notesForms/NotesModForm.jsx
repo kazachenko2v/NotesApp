@@ -5,7 +5,6 @@ import CloseButton from "../UI/noteButtons/CloseButton";
 import AceptButton from "../UI/noteButtons/AceptButton";
 
 import styles from "./Forms.module.css";
-import cnBind from "classnames/bind";
 import cn from "classnames";
 
 import { NOTE_INPUT_LENGTH } from "../../constants";
@@ -53,8 +52,6 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
     return () => window.removeEventListener("keydown", keyHandle);
   }, []);
 
-  const cx = cnBind.bind(styles);
-
   return (
     <div className={styles.form_container}>
       <div className={styles.input_container}>
@@ -63,13 +60,12 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
             type="text"
             placeholder="Title..."
             maxLength={NOTE_INPUT_LENGTH}
-            className={cn(
-              styles.form_title,
-              cx({
-                form_title__incomplete: NOTE_INPUT_LENGTH >= note.title.length,
-                form_title__complete: NOTE_INPUT_LENGTH <= note.title.length,
-              })
-            )}
+            className={cn(styles.form_title, {
+              [styles.form_title__incomplete]:
+                NOTE_INPUT_LENGTH >= note.title.length,
+              [styles.form_title__complete]:
+                NOTE_INPUT_LENGTH <= note.title.length,
+            })}
             value={note.title}
             onChange={(e) => setNote({ ...note, title: e.target.value })}
           ></input>
