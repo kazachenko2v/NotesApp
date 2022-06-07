@@ -16,8 +16,6 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
     body: item.body,
   });
 
-  // const [isTitle, setIsTitle] = React.useState();
-
   const noteRef = React.useRef();
   noteRef.current = note;
 
