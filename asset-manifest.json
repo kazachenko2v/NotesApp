@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/NotesApp/static/css/main.dd9623d0.css",
-    "main.js": "/NotesApp/static/js/main.1fe8d5c1.js",
-    "static/media/note.png": "/NotesApp/static/media/note.f0dda4481685a31c26f2.png",
+    "main.css": "/NotesApp/static/css/main.4e3c8e71.css",
+    "main.js": "/NotesApp/static/js/main.e2644b07.js",
     "static/media/Lobster-Regular.ttf": "/NotesApp/static/media/Lobster-Regular.03c38496322925fec242.ttf",
-    "static/media/bg.jpg": "/NotesApp/static/media/bg.700869320a0e90a12dde.jpg",
     "static/media/Lobster-Regular.woff": "/NotesApp/static/media/Lobster-Regular.a265b0d2506e7f5f79ac.woff",
+    "static/media/bg.jpg": "/NotesApp/static/media/bg.fb0715ab189fbfc2e3a6.jpg",
+    "static/media/note.png": "/NotesApp/static/media/note.965308f359de7af4e428.png",
     "index.html": "/NotesApp/index.html",
-    "main.dd9623d0.css.map": "/NotesApp/static/css/main.dd9623d0.css.map",
-    "main.1fe8d5c1.js.map": "/NotesApp/static/js/main.1fe8d5c1.js.map"
+    "main.4e3c8e71.css.map": "/NotesApp/static/css/main.4e3c8e71.css.map",
+    "main.e2644b07.js.map": "/NotesApp/static/js/main.e2644b07.js.map"
   },
   "entrypoints": [
-    "static/css/main.dd9623d0.css",
-    "static/js/main.1fe8d5c1.js"
+    "static/css/main.4e3c8e71.css",
+    "static/js/main.e2644b07.js"
   ]
 }
