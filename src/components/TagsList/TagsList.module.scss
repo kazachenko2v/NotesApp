@@ -1,0 +1,24 @@
+.tag_container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tag_link {
+  color: blue;
+}
+
+.tag_link:hover {
+  text-decoration: underline;
+}
+
+.close_button {
+  vertical-align: middle;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.tag_container:hover {
+  .close_button {
+    opacity: 1;
+  }
+}

@@ -1,19 +1,29 @@
 import React, { useContext } from "react";
-import SearchContext from "../../context/SearchContext";
-import styles from "./TagsList.module.css";
 
-const TagsList = ({ tag }) => {
+import SearchContext from "../../context/SearchContext";
+
+import styles from "./TagsList.module.scss";
+
+import { TiDelete } from "react-icons/ti";
+
+const TagsList = ({ tag, removeTag }) => {
   const { searchTags } = useContext(SearchContext);
 
-  function clickHandler(e) {
+  const clickHandler = (e) => {
     e.preventDefault();
     searchTags(tag);
-  }
+  };
 
   return (
-    <a className={styles.tag_link} onClick={(e) => clickHandler(e)}>
-      {tag}&nbsp;
-    </a>
+    <div className={styles.tag_container}>
+      <a className={styles.tag_link} onClick={(e) => clickHandler(e)}>
+        {tag}
+      </a>
+      <TiDelete
+        className={styles.close_button}
+        onClick={() => removeTag(tag)}
+      />
+    </div>
   );
 };
 export default TagsList;

@@ -1,8 +1,0 @@
-.tag_link {
-  color: blue;
-}
-
-.tag_link:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}

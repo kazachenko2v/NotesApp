@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 import Header from "../components/Header/Header";
 import NotesList from "../components/NoteList/NotesList";
-import NotesModForm from "../components/notesForms/NotesModForm";
+import NotesModForm from "../components/NotesModForm/NotesModForm";
 import Modal from "../components/UI/Modal/Modal";
 
 import { setLocalStorage } from "../utils/localStorage";

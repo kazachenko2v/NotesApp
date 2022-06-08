@@ -7,6 +7,8 @@ import AceptButton from "../UI/noteButtons/AceptButton";
 import styles from "./Forms.module.css";
 import cn from "classnames";
 
+import unique from "lodash.union";
+
 import { NOTE_INPUT_LENGTH } from "../../constants";
 
 const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
@@ -18,12 +20,18 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
   const noteRef = React.useRef();
   noteRef.current = note;
 
+  const removeSharps = (string) => {
+    if (string) {
+      return string.replace(/#/g, "");
+    }
+    return "";
+  };
+
   const findTags = (string) => {
-    let arr = string.match(/#[a-zа-яё|\d]+(?=\b)/gim);
-    if (arr) {
-      return arr.filter((item, index) => arr.indexOf(item) === index);
-    } else {
-      return "";
+    const tagsArr = string.match(/#[a-zа-яё|\d]+(?=\b)/gim);
+
+    if (tagsArr) {
+      return tagsArr.map((item) => item.slice(1));
     }
   };
 
@@ -32,10 +40,15 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
       alert("Enter something in a Title");
       return;
     }
+    const newTags = findTags(
+      noteRef.current.title + " " + noteRef.current.body
+    );
+
     noteModFunc({
       ...item,
-      ...noteRef.current,
-      tags: findTags(noteRef.current.title + " " + noteRef.current.body),
+      title: removeSharps(noteRef.current.title),
+      body: removeSharps(noteRef.current.body),
+      tags: unique(item.tags, newTags),
     });
     toggleActive();
   };
@@ -85,10 +98,10 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
             size: "30px",
           }}
         >
-          <span onClick={toggleActive}>
+          <span className={styles.button} onClick={toggleActive}>
             <CloseButton />
           </span>
-          <span onClick={createNewNote}>
+          <span className={styles.button} onClick={createNewNote}>
             <AceptButton />
           </span>
         </IconContext.Provider>

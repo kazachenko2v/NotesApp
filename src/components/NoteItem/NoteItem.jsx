@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import NotesModForm from "../notesForms/NotesModForm";
+import NotesModForm from "../NotesModForm/NotesModForm";
 import Modal from "../UI/Modal/Modal";
 import modalContext from "../../reducer/NotesContext";
 import DrawNote from "./DrawNote";
@@ -71,10 +71,10 @@ const NotesItem = ({ item, index, isDragging }) => {
           })}
         >
           <IconContext.Provider value={{ size: "30px" }}>
-            <span onClick={() => removeNote(item.id)}>
+            <span className={styles.button} onClick={() => removeNote(item.id)}>
               <RemoveButton />
             </span>
-            <span onClick={toggleActiveEditForm}>
+            <span className={styles.button} onClick={toggleActiveEditForm}>
               <EditButton />
             </span>
           </IconContext.Provider>
