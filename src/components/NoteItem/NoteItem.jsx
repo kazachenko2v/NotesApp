@@ -22,13 +22,13 @@ const NotesItem = ({ item, index, isDragging }) => {
   const [isActiveButton, setActiveButton] = useState(false);
   const [isLoading, setIsLoadingn] = useState(true);
 
-  const imgRef = React.useRef(null);
+  // const imgRef = React.useRef(null);
 
-  React.useEffect(() => {
-    if (imgRef.current) {
-      imgRef.current.onload = () => setIsLoadingn(false);
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (imgRef.current) {
+  //     imgRef.current.onload = () => setIsLoadingn(false);
+  //   }
+  // }, []);
 
   const toggleActiveEditForm = () => {
     setActiveEditForm(!isActiveEditForm);
@@ -55,7 +55,7 @@ const NotesItem = ({ item, index, isDragging }) => {
         <DrawNote item={item} index={index} />
 
         <img
-          ref={imgRef}
+          onLoad={() => setIsLoadingn(false)}
           className={cn(styles.bgimage, {
             [styles.bgimage__loaded]: !isLoading,
           })}
