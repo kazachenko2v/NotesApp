@@ -1,58 +1,48 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+
 import NotesModForm from "../NotesModForm/NotesModForm";
 import Modal from "../UI/Modal/Modal";
-import modalContext from "../../reducer/NotesContext";
 import DrawNote from "./DrawNote";
 import Loader from "../Loader/Loader";
 
-import img from "./img/note.png";
+import { useActionCreators } from "../../hooks/useActionCreators";
+import { notesActions } from "../../redux/notes/slice";
+import useModal from "../../hooks/useModal";
 
 import RemoveButton from "../UI/noteButtons/RemoveButton";
 import EditButton from "../UI/noteButtons/EditButton";
+import img from "./img/note.png";
 
 import { IconContext } from "react-icons";
 
 import styles from "./NoteItem.module.css";
 import cn from "classnames";
 
-const NotesItem = ({ item, index, isDragging }) => {
-  const { removeNote, editNote } = useContext(modalContext);
+const NotesItem = ({ item, index }) => {
+  const [isShowing, toggle] = useModal();
 
-  const [isActiveEditForm, setActiveEditForm] = useState(false);
-  const [isActiveButton, setActiveButton] = useState(false);
+  const [isHover, setHover] = useState(false);
   const [isLoading, setIsLoadingn] = useState(true);
 
-  // const imgRef = React.useRef(null);
-
-  // React.useEffect(() => {
-  //   if (imgRef.current) {
-  //     imgRef.current.onload = () => setIsLoadingn(false);
-  //   }
-  // }, []);
-
-  const toggleActiveEditForm = () => {
-    setActiveEditForm(!isActiveEditForm);
-  };
+  const actions = useActionCreators(notesActions);
 
   return (
     <>
-      {isActiveEditForm && (
+      {isShowing && (
         <Modal>
           <NotesModForm
             item={item}
-            toggleActive={toggleActiveEditForm}
-            noteModFunc={editNote}
+            toggleActive={toggle}
+            noteModFunc={actions.editNote}
           />
         </Modal>
       )}
       <div
-        className={cn(styles.note_item, {
-          [styles.note_item__dragging]: isDragging,
-        })}
-        onMouseEnter={() => setActiveButton(true)}
-        onMouseLeave={() => setActiveButton(false)}
+        className={styles.note_item}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
       >
-        <DrawNote item={item} index={index} />
+        <DrawNote item={item} index={index} isHover={isHover} />
 
         <img
           onLoad={() => setIsLoadingn(false)}
@@ -67,14 +57,17 @@ const NotesItem = ({ item, index, isDragging }) => {
 
         <div
           className={cn(styles.button_container, {
-            [styles.button__active]: isActiveButton,
+            [styles.button__active]: isHover,
           })}
         >
           <IconContext.Provider value={{ size: "30px" }}>
-            <span className={styles.button} onClick={() => removeNote(item.id)}>
+            <span
+              className={styles.button}
+              onClick={() => actions.removeNote(item.id)}
+            >
               <RemoveButton />
             </span>
-            <span className={styles.button} onClick={toggleActiveEditForm}>
+            <span className={styles.button} onClick={toggle}>
               <EditButton />
             </span>
           </IconContext.Provider>

@@ -1,14 +1,17 @@
 import React from "react";
+import { Provider } from "react-redux";
+
+import store from "./redux/store";
 import MainPage from "./pages/MainPage";
+
 import "./styles/reset.css";
 import "./styles/App.css";
-import NotesState from "./reducer/NotesState";
 
 function App() {
   return (
-    <NotesState>
+    <Provider store={store}>
       <MainPage />
-    </NotesState>
+    </Provider>
   );
 }
 

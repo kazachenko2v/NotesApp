@@ -4,10 +4,12 @@
 }
 
 .tag_link {
-  color: blue;
+  color: #4080fd;
+  transition: color 0.2s ease;
 }
 
 .tag_link:hover {
+  color: #003aad;
   text-decoration: underline;
 }
 

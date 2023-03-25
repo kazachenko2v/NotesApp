@@ -1,96 +1,104 @@
 import React from "react";
-
 import { IconContext } from "react-icons";
+import unique from "lodash.union";
+
+import TagsItem from "../TagsItem/TagsItem";
 import CloseButton from "../UI/noteButtons/CloseButton";
 import AceptButton from "../UI/noteButtons/AceptButton";
 
-import styles from "./Forms.module.css";
-import cn from "classnames";
-
-import unique from "lodash.union";
+import { useActionCreators } from "../../hooks/useActionCreators";
+import { notesActions } from "../../redux/notes/slice";
+import removeSharps from "../../utils/removeSharps";
+import getTags from "../../utils/getTags";
+import useKeyControlModal from "../../hooks/useKeyControlModal";
 
 import { NOTE_INPUT_LENGTH } from "../../constants";
+
+import styles from "./Forms.module.css";
+import cn from "classnames";
 
 const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
   const [note, setNote] = React.useState({
     title: item.title,
     body: item.body,
+    tags: item.tags,
   });
 
-  const noteRef = React.useRef();
-  noteRef.current = note;
+  const actions = useActionCreators(notesActions);
 
-  const removeSharps = (string) => {
-    if (string) {
-      return string.replace(/#/g, "");
-    }
-    return "";
+  const changeNoteHandler = (e) => {
+    const newTags = getTags(e.target.value);
+
+    setNote({
+      ...note,
+      [e.target.name]: e.target.value,
+      tags: unique(item.tags, newTags),
+    });
   };
 
-  const findTags = (string) => {
-    const tagsArr = string.match(/#[a-zа-яё|\d]+(?=\b)/gim);
-
-    if (tagsArr) {
-      return tagsArr.map((item) => item.slice(1));
-    }
+  const removeTag = (tag) => {
+    setNote({
+      ...note,
+      tags: note.tags.filter((item) => item !== tag),
+    });
+    actions.editNote({
+      ...item,
+      tags: item.tags.filter((item) => item !== tag),
+    });
   };
 
   const createNewNote = () => {
-    if (!noteRef.current.title) {
+    if (!note.title) {
       alert("Enter something in a Title");
       return;
     }
-    const newTags = findTags(
-      noteRef.current.title + " " + noteRef.current.body
-    );
 
-    noteModFunc({
+    const newnote = {
       ...item,
-      title: removeSharps(noteRef.current.title),
-      body: removeSharps(noteRef.current.body),
-      tags: unique(item.tags, newTags),
-    });
+      title: removeSharps(note.title),
+      body: removeSharps(note.body),
+      tags: unique(item.tags, note.tags),
+    };
+
+    noteModFunc(newnote);
     toggleActive();
   };
 
-  React.useEffect(() => {
-    const keyHandle = (e) => {
-      if (e.code === "Enter") {
-        createNewNote();
-      } else if (e.code === "Escape") {
-        toggleActive();
-      }
-    };
-    window.addEventListener("keydown", keyHandle);
-    return () => window.removeEventListener("keydown", keyHandle);
-  }, []);
+  useKeyControlModal(createNewNote, toggleActive);
 
   return (
     <div className={styles.form_container}>
       <div className={styles.input_container}>
-        <div>
-          <input
-            type="text"
-            placeholder="Title..."
-            maxLength={NOTE_INPUT_LENGTH}
-            className={cn(styles.form_title, {
-              [styles.form_title__incomplete]:
-                NOTE_INPUT_LENGTH >= note.title.length,
-              [styles.form_title__complete]:
-                NOTE_INPUT_LENGTH <= note.title.length,
-            })}
-            value={note.title}
-            onChange={(e) => setNote({ ...note, title: e.target.value })}
-          ></input>
-        </div>
+        <input
+          type="text"
+          placeholder="Title..."
+          maxLength={NOTE_INPUT_LENGTH}
+          className={cn(styles.form_title, {
+            [styles.form_title__incomplete]:
+              NOTE_INPUT_LENGTH >= note.title.length,
+            [styles.form_title__complete]:
+              NOTE_INPUT_LENGTH <= note.title.length,
+          })}
+          value={note.title}
+          name="title"
+          onChange={changeNoteHandler}
+        ></input>
         <textarea
           type="text"
           placeholder="Text..."
-          rows="6"
+          rows="5"
           className={styles.form_textarea}
           value={note.body}
-          onChange={(e) => setNote({ ...note, body: e.target.value })}
+          name="body"
+          onChange={changeNoteHandler}
         ></textarea>
+        {note.tags && (
+          <div>
+            {note.tags.map((tag, index) => (
+              <TagsItem key={index} tag={tag} removeTag={removeTag} />
+            ))}
+          </div>
+        )}
       </div>
       <div className={styles.button_container}>
         <IconContext.Provider

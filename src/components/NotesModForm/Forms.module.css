@@ -48,6 +48,7 @@
 
 .form_textarea {
   resize: none;
+  margin-bottom: 7px;
 }
 
 .button {

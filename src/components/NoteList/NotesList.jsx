@@ -1,13 +1,21 @@
 import React, { useContext } from "react";
+import { useSelector } from "react-redux";
+
 import NoteItem from "../NoteItem/NoteItem";
-import NotesContext from "../../reducer/NotesContext";
+
 import SearchContext from "../../context/SearchContext";
+import { setLocalStorage } from "../../utils/localStorage";
 
 import styles from "./NotesList.module.css";
 
 const NotesList = React.memo(() => {
+  const notes = useSelector((state) => state.notes);
+
+  React.useEffect(() => {
+    setLocalStorage("notes", notes);
+  }, [notes]);
+
   const { searchQuery } = useContext(SearchContext);
-  const { notes } = useContext(NotesContext);
 
   let noteText = (note) => {
     return (note.title + note.body + note.tags).toLowerCase();

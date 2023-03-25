@@ -33,6 +33,14 @@
   overflow: hidden;
 }
 
+.tag {
+  color: #4080fd;
+  transition: all 0.2s ease;
+}
+
+.tag_hover {
+}
+
 .button_container {
   display: flex;
   flex-direction: column;

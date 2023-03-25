@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 
 import SearchContext from "../../context/SearchContext";
 
-import styles from "./TagsList.module.scss";
-
 import { TiDelete } from "react-icons/ti";
 
-const TagsList = ({ tag, removeTag }) => {
+import styles from "./TagsItem.module.scss";
+
+const TagsItem = ({ tag, removeTag }) => {
   const { searchTags } = useContext(SearchContext);
 
   const clickHandler = (e) => {
@@ -26,4 +26,4 @@ const TagsList = ({ tag, removeTag }) => {
     </div>
   );
 };
-export default TagsList;
+export default TagsItem;
