@@ -2,7 +2,7 @@ import React from "react";
 
 import { AiOutlineCheck } from "react-icons/ai";
 
-const AceptButton = React.memo(() => {
+const AceptButton: React.FC = React.memo(() => {
   return <AiOutlineCheck title="Acept" />;
 });
 

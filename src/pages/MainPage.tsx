@@ -1,5 +1,3 @@
-import React from "react";
-
 import Header from "../components/Header/Header";
 import NotesList from "../components/NoteList/NotesList";
 import NotesModForm from "../components/NotesModForm/NotesModForm";
@@ -9,7 +7,7 @@ import { useActionCreators } from "../hooks/useActionCreators";
 import { notesActions } from "../redux/notes/slice";
 import useModal from "../hooks/useModal";
 
-import SearchState from "./../context/SearchState";
+import SearchState from "../context/SearchState";
 
 import styles from "./Main.module.css";
 import "../styles/reset.css";

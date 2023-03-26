@@ -1,4 +1,14 @@
-export default ({ children: text = "", tags = [], isHover, styles }) => {
+export default ({
+  children: text = "",
+  tags = [],
+  isHover,
+  styles,
+}: {
+  children: string;
+  tags: unknown[];
+  isHover: boolean;
+  styles: Record<string, string>;
+}) => {
   if (!tags?.length) {
     return <span>{text}</span>;
   }
@@ -10,7 +20,7 @@ export default ({ children: text = "", tags = [], isHover, styles }) => {
       {matches.map((match, i) => {
         const startIndex = match.index;
         const currentText = match[0];
-        const endIndex = startIndex + currentText.length;
+        const endIndex = startIndex! + currentText.length;
         const nextIndex = matches[i + 1]?.index;
         const untilNextText = text.slice(endIndex, nextIndex);
         return (

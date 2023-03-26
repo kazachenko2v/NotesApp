@@ -1,24 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { getLocalStorage } from "../../utils/localStorage";
-import initNotes from "../../notes/notes";
+import initNotes from "../../notes/notes.json";
+import { Note } from "./types";
 
-const initialState =
-  getLocalStorage("notes") && getLocalStorage("notes").length !== 0
-    ? getLocalStorage("notes")
-    : initNotes;
+const initialState: Note[] = getLocalStorage("notes")
+  ? // && getLocalStorage("notes").length !== 0
+    getLocalStorage("notes")
+  : initNotes;
 
 export const notesSlice = createSlice({
   name: "notes",
   initialState: initialState,
   reducers: {
-    addNote: (state, action) => {
+    addNote: (state, action: PayloadAction<Note>) => {
       state.push(action.payload);
     },
-    removeNote: (state, action) => {
+    removeNote: (state, action: PayloadAction<number>) => {
       return state.filter((item) => item.id !== action.payload);
     },
-    editNote: (state, action) => {
+    editNote: (state, action: PayloadAction<Note>) => {
       return state.map((item) => {
         if (item.id !== action.payload.id) {
           return item;

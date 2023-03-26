@@ -1,6 +1,5 @@
 import React from "react";
 import { IconContext } from "react-icons";
-import unique from "lodash.union";
 
 import TagsItem from "../TagsItem/TagsItem";
 import CloseButton from "../UI/noteButtons/CloseButton";
@@ -10,14 +9,20 @@ import { useActionCreators } from "../../hooks/useActionCreators";
 import { notesActions } from "../../redux/notes/slice";
 import removeSharps from "../../utils/removeSharps";
 import getTags from "../../utils/getTags";
+import unique from "../../utils/unique";
 import useKeyControlModal from "../../hooks/useKeyControlModal";
 
 import { NOTE_INPUT_LENGTH } from "../../constants";
 
 import styles from "./Forms.module.css";
 import cn from "classnames";
+import { NotesModFormProps } from "../types";
 
-const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
+const NotesModForm: React.FC<NotesModFormProps> = ({
+  item,
+  toggleActive,
+  noteModFunc,
+}) => {
   const [note, setNote] = React.useState({
     title: item.title,
     body: item.body,
@@ -26,17 +31,19 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
 
   const actions = useActionCreators(notesActions);
 
-  const changeNoteHandler = (e) => {
+  const changeNoteHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const newTags = getTags(e.target.value);
 
     setNote({
       ...note,
       [e.target.name]: e.target.value,
-      tags: unique(item.tags, newTags),
+      tags: newTags ? unique([...item.tags, ...newTags]) : item.tags,
     });
   };
 
-  const removeTag = (tag) => {
+  const removeTag = (tag: string) => {
     setNote({
       ...note,
       tags: note.tags.filter((item) => item !== tag),
@@ -57,7 +64,7 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
       ...item,
       title: removeSharps(note.title),
       body: removeSharps(note.body),
-      tags: unique(item.tags, note.tags),
+      tags: unique([...item.tags, ...note.tags]),
     };
 
     noteModFunc(newnote);
@@ -84,9 +91,8 @@ const NotesModForm = ({ item, toggleActive, noteModFunc }) => {
           onChange={changeNoteHandler}
         ></input>
         <textarea
-          type="text"
           placeholder="Text..."
-          rows="5"
+          rows={5}
           className={styles.form_textarea}
           value={note.body}
           name="body"

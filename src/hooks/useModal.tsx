@@ -7,7 +7,7 @@ const useModal = () => {
     setIsShowing(!isShowing);
   }
 
-  return [isShowing, toggle];
+  return [isShowing, toggle] as const;
 };
 
 export default useModal;

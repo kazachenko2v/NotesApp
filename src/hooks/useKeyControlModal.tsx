@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import React from "react";
 
-const useKeyControlModal = (confirm, escape) => {
-  useEffect(() => {
-    const keyHandle = (e) => {
+const useKeyControlModal = (confirm: () => void, escape: () => void) => {
+  React.useEffect(() => {
+    const keyHandle = (e: KeyboardEvent) => {
       if (e.code === "Enter") {
         confirm();
       } else if (e.code === "Escape") {

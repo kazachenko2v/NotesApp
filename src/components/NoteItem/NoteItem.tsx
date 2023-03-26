@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import NotesModForm from "../NotesModForm/NotesModForm";
 import Modal from "../UI/Modal/Modal";
@@ -17,12 +17,13 @@ import { IconContext } from "react-icons";
 
 import styles from "./NoteItem.module.css";
 import cn from "classnames";
+import { NotesItemProps } from "../types";
 
-const NotesItem = ({ item, index }) => {
+const NotesItem: React.FC<NotesItemProps> = ({ item, index }) => {
   const [isShowing, toggle] = useModal();
 
-  const [isHover, setHover] = useState(false);
-  const [isLoading, setIsLoadingn] = useState(true);
+  const [isHover, setHover] = React.useState(false);
+  const [isLoading, setIsLoadingn] = React.useState(true);
 
   const actions = useActionCreators(notesActions);
 

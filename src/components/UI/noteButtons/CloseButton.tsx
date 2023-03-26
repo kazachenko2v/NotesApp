@@ -2,7 +2,7 @@ import React from "react";
 
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
-const CloseButton = React.memo(() => {
+const CloseButton: React.FC = React.memo(() => {
   return <AiOutlineCloseCircle title="Close" />;
 });
 

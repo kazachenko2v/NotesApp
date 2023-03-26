@@ -1,30 +1,31 @@
-import React, { useContext } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 
 import NoteItem from "../NoteItem/NoteItem";
 
-import SearchContext from "../../context/SearchContext";
+import { useAppContext } from "./../../hooks/useAppContext";
+import { useAppSelector } from "../../hooks/useActionCreators";
 import { setLocalStorage } from "../../utils/localStorage";
 
 import styles from "./NotesList.module.css";
+import { Note } from "../../redux/notes/types";
 
-const NotesList = React.memo(() => {
-  const notes = useSelector((state) => state.notes);
+const NotesList: React.FC = React.memo(() => {
+  const notes = useAppSelector((state) => state.notes);
 
   React.useEffect(() => {
     setLocalStorage("notes", notes);
   }, [notes]);
 
-  const { searchQuery } = useContext(SearchContext);
+  const search = useAppContext();
 
-  let noteText = (note) => {
+  let noteText = (note: Note) => {
     return (note.title + note.body + note.tags).toLowerCase();
   };
 
   const getSearchedNoteList = () => {
-    if (searchQuery) {
+    if (search?.searchQuery) {
       return [...notes].filter((item) =>
-        noteText(item).includes(searchQuery.toLowerCase())
+        noteText(item).includes(search.searchQuery.toLowerCase())
       );
     }
     return notes;

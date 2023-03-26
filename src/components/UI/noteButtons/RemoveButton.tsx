@@ -2,7 +2,7 @@ import React from "react";
 
 import { MdDeleteForever } from "react-icons/md";
 
-const RemoveButton = React.memo(() => {
+const RemoveButton: React.FC = React.memo(() => {
   return <MdDeleteForever title="Remove note" />;
 });
 

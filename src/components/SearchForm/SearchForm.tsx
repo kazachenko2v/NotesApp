@@ -1,17 +1,21 @@
-import React, { useContext } from "react";
-import SearchContext from "../../context/SearchContext";
+import React from "react";
 
 import { AiOutlineClose } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 
+import { useAppContext } from "../../hooks/useAppContext";
+
 import styles from "./SearchForm.module.css";
 
-const SearchForm = ({}) => {
-  const { searchQuery, setSearchQuery, searchTags, textInput } =
-    useContext(SearchContext);
+const SearchForm: React.FC = () => {
+  const search = useAppContext();
 
-  function clickHandler(e) {
-    searchTags(e.target.value);
+  function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    search?.searchTags(e.target.value);
+  }
+
+  function clickHandler() {
+    search?.setSearchQuery("");
   }
 
   return (
@@ -19,14 +23,14 @@ const SearchForm = ({}) => {
       <BsSearch size="20px" className={styles.search_icon} />
       <input
         className={styles.search}
-        onChange={(e) => clickHandler(e)}
+        onChange={changeHandler}
         type="text"
-        ref={textInput}
+        ref={search?.textInput}
         placeholder="Search..."
       />
-      {searchQuery && (
+      {search?.searchQuery && (
         <AiOutlineClose
-          onClick={() => setSearchQuery("")}
+          onClick={clickHandler}
           size="20px"
           className={styles.clear_icon}
         />
