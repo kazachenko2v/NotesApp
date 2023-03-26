@@ -3,3 +3,6 @@
 - You can add and edit notes
 - Create tags with **#** in front of words
 - Filter NotesList by clicking on the **#tag**
+
+
+used React, Typescript and Rudux Toolkit
